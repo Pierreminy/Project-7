@@ -6,6 +6,7 @@ Created on Tue Nov 29 10:00:52 2022
 """
 from dash import Dash, dcc, html
 from dash.dependencies import Input, Output, State
+import json
 import joblib
 import plotly.graph_objects as go
 import pandas as pd
@@ -31,20 +32,24 @@ app.layout = html.Div([
         ],
         style={'width': '66%', 'display': 'inline-block'}),
         
+        
+        
+        
+        
         html.Div([
             dcc.Input(id="client_id", type="number", value='100001'),
             html.Button(id="validation_bt", n_clicks=0, children="Valider")
         ],
-        style={'width': '33%', "float" : "right", 'display': 'inline-block'})
+        style={'width': '33%', "float" : "right", 'display': 'inline-block', 'background-color' : 'black'})
     ]),
     html.Div(dcc.Graph(id='bar_mean', figure = {"layout" : {"height" : 800}}), 
-        style={'width': '33%', 'display': 'inline-block', 'padding': '0 20', "vertical_align" : "middle"}),
+        style={'width': '33%', 'display': 'inline-block', 'padding': '0 20', "vertical_align" : "middle", 'background-color' : 'black'}),
     html.Div(dcc.Graph(id='boxplot', figure = {"layout" : {"height" : 800}}), 
-        style={'width': '33%', 'display': 'inline-block', 'padding': '0 20', "vertical_align" : "middle"}),
+        style={'width': '33%', 'display': 'inline-block', 'padding': '0 20', "vertical_align" : "middle", 'background-color' : 'black'}),
     html.Div([
         dcc.Graph(id='score'),
         dcc.Graph(id='feature_imp')
-        ], style={'display': 'inline-block', 'width': '33%', "float":"right"})
+        ], style={'display': 'inline-block', 'width': '33%', "float":"right", 'background-color' : 'black'})
 ])
         
 
