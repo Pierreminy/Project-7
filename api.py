@@ -4,12 +4,18 @@ Created on Wed Nov 16 12:27:38 2022
 
 @author: pierr
 """
-from flask import Flask
+from flask import Flask, request
 import pickle 
+import json
 import lightgbm
 import gzip
 import joblib
+import numpy as np
 app = Flask(__name__)
+
+
+
+feats = np.genfromtxt('feats.csv', dtype='unicode', delimiter=',')
 
 
 def load_model(file_path):
@@ -18,7 +24,7 @@ def load_model(file_path):
         classifier = pickle.load(f)
     return classifier
 
-model = load_model(r'D:\API\model.pkl')
+
 
 def load_joblib(file_path):
  
@@ -26,7 +32,7 @@ def load_joblib(file_path):
         classifier = joblib.load(f)
     return classifier
 
-explainer = load_joblib(r'D:\API\shap_explainer.joblib')
+
 
 def load_data(file_path):
  
@@ -34,7 +40,13 @@ def load_data(file_path):
         classifier = pickle.load(f)
     return classifier
 
-data = load_data(r'D:\API\test_df.gz')
+model = load_model(r'D:\API\model.pkl')
+test_df = load_data(r'D:\API\test_df.gz')
+explainer = load_joblib(r'D:\API\shap_explainer.joblib')
+
+
+test_df.drop(columns=["index"], inplace=True)
+test_df.set_index("SK_ID_CURR", inplace=True)
 
 def make_prediction(client_id):
     return model.predict_proba([test_df[feats].loc[client_id]])[0, 1]
@@ -80,13 +92,13 @@ def importances():
     else:
         return "Error"    
 
-@app.route('/barplot', methods=["GET"])
+@app.route('/bar', methods=["GET"])
 def bar():
     if 'client_id' in request.args:
         client_id = int(request.args["client_id"])
         feat = str(request.args["feature"])
         
-        dff = df[feat]
+        dff = test_df[feat]
         retour = []
         retour.append(float(dff.loc[client_id]))
         retour.append(np.mean(dff))
@@ -101,7 +113,7 @@ def boxplot():
     if 'feature' in request.args:
         feat = str(request.args["feature"])
         
-        dff = df[feat]
+        dff = test_df[feat]
      
         return json.dumps(dff.tolist())
     else:
