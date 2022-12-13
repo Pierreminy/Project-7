@@ -98,8 +98,6 @@ pyrsistent
 PySocks 
 python-dateutil 
 pytz 
-pywin32==302
-pywinpty 
 PyYAML==6.0
 pyzmq 
 regex 
