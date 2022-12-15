@@ -121,4 +121,4 @@ def boxplot():
     
     
 
-app.run(host='localhost')
+app.run
