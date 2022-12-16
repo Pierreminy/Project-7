@@ -120,5 +120,3 @@ def boxplot():
         return "Error"   
     
     
-
-app.run
