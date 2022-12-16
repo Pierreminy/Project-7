@@ -3,6 +3,7 @@ fastjsonschema
 filelock 
 Flask==2.2.2
 Flask-Compress 
+ipython
 importlib-metadata 
 importlib-resources 
 joblib==1.1.0
