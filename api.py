@@ -40,9 +40,9 @@ def load_data(file_path):
         classifier = pickle.load(f)
     return classifier
 
-model = load_model(r'D:\API\model.pkl')
-test_df = load_data(r'D:\API\test_df.gz')
-explainer = load_joblib(r'D:\API\shap_explainer.joblib')
+model = load_model(r'model.pkl')
+test_df = load_data(r'test_df.gz')
+explainer = load_joblib(r'shap_explainer.joblib')
 
 
 test_df.drop(columns=["index"], inplace=True)
