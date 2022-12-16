@@ -20,7 +20,7 @@ plotly
 ply==3.11
 requests 
 sacremoses 
-scikit-learn 
+scikit-learn==1.0.2
 shap==0.41.0
 statsmodels==0.13.2
 zipp 
