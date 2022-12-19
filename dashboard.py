@@ -19,6 +19,7 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 feats = requests.get("https://creditmanager2.herokuapp.com/feats/").json()
 
 app = Dash(__name__, external_stylesheets=external_stylesheets)
+server= app.server
 
 app.layout = html.Div([
     html.Div([
