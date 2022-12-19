@@ -21,7 +21,11 @@ feats = requests.get("https://creditmanager2.herokuapp.com/feats/").json()
 app = Dash(__name__, external_stylesheets=external_stylesheets)
 server= app.server
 
-app.layout = html.Div([
+colors = {
+    'background': '#111111',
+    'text': '#7FDBFF'
+}
+app.layout = html.Div(style={'backgroundColor': colors['background'],'color': colors['text']},children=[
     html.Div([
 
         html.Div([
@@ -92,7 +96,10 @@ def update_score(n_clicks, client_id):
             }
         )
     )
-    
+    fig1.update_layout(
+    plot_bgcolor=colors['background'],
+    paper_bgcolor=colors['background']
+    )
     fig1.add_annotation(x=0.5, y=0.4, text=accept, font = dict(size = 30, color=color), showarrow = False)
     
     return fig1
@@ -117,6 +124,10 @@ def update_fi(n_clicks, client_id):
            color = "Influence",
            orientation="h",
            title = "Principales données influant sur le résultat")
+    fig2.update_layout(
+    plot_bgcolor=colors['background'],
+    paper_bgcolor=colors['background']
+    )
     fig2.update_xaxes(title="Impact sur le résultat")
     fig2.update_yaxes(title="Variable étudiée")
     
@@ -143,6 +154,10 @@ def plot_bar(n_clicks, feature, client_id):
            y = [results[0], results[1]],
            color = [results[0], results[1]],
            title = "Comparaison du client à la moyenne")
+    fig3.update_layout(
+    plot_bgcolor=colors['background'],
+    paper_bgcolor=colors['background']
+    )
     fig3.update_xaxes(title="")
     fig3.update_yaxes(title="Valeur")
     
@@ -155,6 +170,10 @@ def plot_box(feature):
                             params={"feature" : feature}).json()  
     
     fig4 = px.box(dff, title = "Répartition de la variable dans la clientèle")
+    fig4.update_layout(
+    plot_bgcolor=colors['background'],
+    paper_bgcolor=colors['background']
+    )
     fig4.update_xaxes(title="")
     fig4.update_yaxes(title="Valeur")
         
