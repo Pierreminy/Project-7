@@ -25,7 +25,7 @@ colors = {
     'background': '#111111',
     'text': '#7FDBFF'
 }
-app.layout = html.Div(style={'backgroundColor': colors['background'],'color': colors['text']},children=[
+app.layout = html.Div([
     html.Div([
 
         html.Div([
